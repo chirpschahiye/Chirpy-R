@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chirpy R 🐣</title>
+  <style>
+    :root {
+      --lavender: #cdb4db;
+      --nude: #f2e9e4;
+      --accent: #ffc8dd;
+      --text: #4a4a4a;
+      --soft: #faedfa;
+      --flower: #e7d6e0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--nude);
+      color: var(--text);
+      transition: background 0.5s;
+      overflow-x: hidden;
+    }
+
+    .flower {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--flower);
+      border-radius: 50%;
+      animation: float 8s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    .loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: var(--lavender);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .loader h1 {
+      font-style: italic;
+      color: white;
+      animation: fadeOut 2s ease-in-out forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--soft);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav a {
+      margin: 0 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    section {
+      padding: 2rem;
+    }
+
+    .now-playing {
+      background: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      display: inline-block;
+      font-style: italic;
+      margin: 1rem 2rem;
+    }
+
+    .chick {
+      width: 24px;
+      height: 24px;
+    }
+
+    .blog-container, .gallery, .reccos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .blog-post, .gallery-img, .recco-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .blog-post:hover, .gallery-img:hover, .recco-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .blog-post img, .gallery-img img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .blog-post p, .recco-card p {
+      padding: 1rem;
+      font-style: italic;
+    }
+
+    .gallery-img {
+      position: relative;
+    }
+
+    .gallery-img:hover img {
+      transform: scale(1.05);
+    }
+
+    .recco-card h3 {
+      margin: 1rem;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background: var(--soft);
+    }
+  </style>
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.querySelector(".loader").style.display = "none";
+      }, 2000);
+
+      // Generate floating flower animation
+      for (let i = 0; i < 15; i++) {
+        const flower = document.createElement('div');
+        flower.className = 'flower';
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.animationDuration = 8 + Math.random() * 5 + 's';
+        document.body.appendChild(flower);
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="loader">
+    <h1>chirping...</h1>
+  </div>
+
+  <header>
+    <h1>
+      <img class="chick" src="chick_icon_preview.png" alt="Chick" /> Chirpy R
+    </h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#blog">Blog</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reccos">Reccos</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="now-playing">Now Playing 💜: Loading your vibe...</div>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Toggle-based sections coming soon...</p>
+  </section>
+
+  <section id="blog">
+    <h2>Blog</h2>
+    <div class="blog-container">
+      <div class="blog-post">
+        <img src="https://source.unsplash.com/random/400x200?thoughts" alt="Post">
+        <p>Sometimes I just stare at the sky and wonder...</p>
+      </div>
+      <div class="blog-post">
+        <img src="https://source.unsplash.com/random/400x200?notes" alt="Post">
+        <p>Notes from a lavender morning.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <div class="gallery-img"><img src="https://source.unsplash.com/random/400x400?aesthetic" alt="Mood 1"></div>
+      <div class="gallery-img"><img src="https://source.unsplash.com/random/400x400?vibe" alt="Mood 2"></div>
+    </div>
+  </section>
+
+  <section id="reccos">
+    <h2>Reccos</h2>
+    <div class="reccos">
+      <div class="recco-card">
+        <h3>🎬 Past Lives</h3>
+        <p>Soft and stirring — a story that lingers.</p>
+      </div>
+      <div class="recco-card">
+        <h3>🎧 Laufey — Promise</h3>
+        <p>Feels like lavender dreams and rainy windows.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Instagram: <a href="https://instagram.com/YOUR_HANDLE" target="_blank">@YOUR_HANDLE</a></p>
+  </section>
+
+  <footer>
+    Made with 🌸 by Chirpy R
+  </footer>
+</body>
+</html>
